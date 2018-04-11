@@ -7,7 +7,7 @@
 
 Ensure Homebew is installed, follow steps at:
 
-`https://brew.sh`
+[Homebrew](https://brew.sh)
 
 Then:
 
@@ -19,7 +19,7 @@ Then:
 
 Ensure Chocolatey is installed, follow steps at:
 
-`https://chocolatey.org/install`
+[Chocolatey](https://chocolatey.org/install)
 
 Then:
 
