@@ -9,6 +9,8 @@ Ensure Homebew is installed, follow steps at:
 
 `https://brew.sh`
 
+Then:
+
 `brew install kubectl`
 
 `curl -o conf https://raw.githubusercontent.com/pickledrick/demo/master/config`
@@ -18,6 +20,8 @@ Ensure Homebew is installed, follow steps at:
 Ensure Chocolatey is installed, follow steps at:
 
 `https://chocolatey.org/install`
+
+Then:
 
 `choco install -y kubernetes-cli curl`
 
