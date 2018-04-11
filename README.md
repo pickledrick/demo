@@ -33,9 +33,11 @@ Then:
 
 ### standard ###
 
-`kubectl --kubeconfig=conf -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-1.yaml`
+`kubectl --kubeconfig=conf -n <your-name> apply /
+ -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-1.yaml`
 
 ### resilient ###
 
-`kubectl --kubeconfig=conf -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-2.yaml`
+`kubectl --kubeconfig=conf -n <your-name> apply /
+-f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-2.yaml`
 
