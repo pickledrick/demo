@@ -19,7 +19,7 @@ Then:
 
 Ensure Chocolatey is installed, follow steps at:
 
-[Chocolatey](https://chocolatey.org/install)
+[Chocolatey](https://chocolatey.org/install#installing-chocolatey)
 
 Then:
 
