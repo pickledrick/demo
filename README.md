@@ -29,13 +29,24 @@ Then:
 
 `brew install kubectl`
 
-## Deploy ##
+## Demo ##
 
 ### standard ###
 
+#### deploy ####
+
 `kubectl --kubeconfig=conf -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-1.yaml`
+
+#### visualize ####
+
+[Grafana](http://iamalink)
 
 ### resilient ###
 
+#### deploy ####
+
 `kubectl --kubeconfig=conf -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-2.yaml`
 
+#### visualize ####
+
+[Grafana](http://iamalink)
