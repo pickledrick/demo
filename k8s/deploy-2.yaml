@@ -1,0 +1,105 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: bbq
+  labels:
+    app: bbq
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bbq
+  template:
+    metadata:
+      labels:
+        app: bbq
+    spec:
+      containers:
+      - name: bbq
+        image: quay.io/pickledrick/bbq
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bbq
+spec:
+  selector:
+    app: bbq
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: tomato
+  labels:
+    app: tomato
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tomato
+  template:
+    metadata:
+      labels:
+        app: tomato
+    spec:
+      containers:
+      - name: tomato
+        image: quay.io/pickledrick/tomato
+        ports:
+        - containerPort: 8081
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomato
+spec:
+  selector:
+    app: tomato
+  ports:
+  - protocol: TCP
+    port: 80
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: sss
+  labels:
+    app: sss
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sss
+  template:
+    metadata:
+      labels:
+        app: sss
+    spec:
+      containers:
+      - name: sss
+        env:
+        - name: DEADLINE
+          value: "3"
+        image: quay.io/pickledrick/sss
+        ports:
+        - containerPort: 9091
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sss
+spec:
+  selector:
+    app: sss
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9091
+    name: app
