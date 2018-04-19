@@ -13,7 +13,7 @@ Then:
 
 `brew install kubectl`
 
-`curl -o conf https://raw.githubusercontent.com/pickledrick/demo/master/config`
+`curl -o config https://raw.githubusercontent.com/pickledrick/demo/master/config`
 
 ### Windows ###
 
@@ -25,24 +25,24 @@ Then:
 
 `choco install -y kubernetes-cli curl`
 
-`curl -o conf https://raw.githubusercontent.com/pickledrick/demo/master/config`
+`curl -o config https://raw.githubusercontent.com/pickledrick/demo/master/config`
 
 
 ## Demo ##
 
 ### create namespace ###
 
-`kubectl create ns <your-name>`
+`kubectl --kubeconfig=config create ns <your-name>`
 
 ### basic ###
 
 #### deploy ####
 
-`kubectl --kubeconfig=conf -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy.yaml`
+`kubectl --kubeconfig=config -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy.yaml`
 
 ### run ###
 
-`k -n <your-name> scale deploy sss --replicas=1`
+`kubectl --kubeconfig=config -n <your-name> scale deploy sss --replicas=1`
 
 #### visualize ####
 
@@ -54,7 +54,7 @@ Then:
 
 #### deploy ####
 
-`kubectl --kubeconfig=conf -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-resil.yaml`
+`kubectl --kubeconfig=config -n <your-name> apply -f https://raw.githubusercontent.com/pickledrick/demo/master/k8s/deploy-resil.yaml`
 
 #### visualize ####
 
