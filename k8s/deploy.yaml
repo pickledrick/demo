@@ -2,40 +2,6 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: bbq
-  labels:
-    app: bbq
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: bbq
-  template:
-    metadata:
-      labels:
-        app: bbq
-    spec:
-      containers:
-      - name: bbq
-        image: quay.io/pickledrick/bbq
-        ports:
-        - containerPort: 8080
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: bbq
-spec:
-  selector:
-    app: bbq
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
----
-apiVersion: apps/v1beta2
-kind: Deployment
-metadata:
   name: tomato
   labels:
     app: tomato
@@ -54,6 +20,8 @@ spec:
         image: quay.io/pickledrick/tomato
         ports:
         - containerPort: 8081
+      nodeSelector:
+        sauce: tomato
 ---
 kind: Service
 apiVersion: v1
@@ -65,6 +33,53 @@ spec:
   ports:
   - protocol: TCP
     port: 80
+    targetPort: 8081
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: bbq
+  labels:
+    app: bbq
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bbq
+  template:
+    metadata:
+      labels:
+        app: bbq
+    spec:
+      containers:
+      - name: bbq
+        image: quay.io/pickledrick/bbq
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 1
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 1
+      nodeSelector:
+        sauce: bbq
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bbq
+spec:
+  selector:
+    app: bbq
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -73,7 +88,7 @@ metadata:
   labels:
     app: sss
 spec:
-  replicas: 3
+  replicas: 0
   selector:
     matchLabels:
       app: sss
@@ -87,14 +102,18 @@ spec:
         env:
         - name: DEADLINE
           value: "3"
-        image: quay.io/pickledrick/sss
+        image: quay.io/pickledrick/sss:basic
         ports:
         - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/role: master
 ---
 kind: Service
 apiVersion: v1
 metadata:
   name: sss
+  labels:
+    app: sss
 spec:
   selector:
     app: sss
